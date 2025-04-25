@@ -1,10 +1,11 @@
 import React from "react"
-function App() {
+import LandingPage from "./pages/LandingPage"
 
+function App() {
   return (
     <>
       <div>
-        hello!
+        <LandingPage/>
       </div>
     </>
   )
