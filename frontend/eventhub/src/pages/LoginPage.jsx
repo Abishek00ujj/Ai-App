@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google'; // Import GoogleLogin
 import { jwtDecode } from 'jwt-decode'; // Import jwtDecode to decode the credential
 import Navbar from '../components/Navbar';
+
+import { useNavigate } from 'react-router-dom';
 // Helper function to decode the Google credential JWT
 const decodeGoogleCredential = (credentialResponse) => {
+
   // Decode the JWT token
   const decoded = jwtDecode(credentialResponse.credential);
   console.log('Decoded Google Credential:', decoded);
@@ -12,8 +15,14 @@ const decodeGoogleCredential = (credentialResponse) => {
 
 
 function LoginPage() {
+    const navigate = useNavigate();
+    const [redirect, setRedirect] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const handleRedirect=()=>{
+    setRedirect(true);
+  
+}
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,32 +33,20 @@ function LoginPage() {
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
     const googleUser = decodeGoogleCredential(credentialResponse);
-    // This is where you send the `credentialResponse.credential` (the JWT)
-    // or the decoded `googleUser` info to your backend server for verification and login.
+   
     console.log('Google Login Success:', googleUser);
 
-    // Example of what you might send to your backend:
-    // fetch('/api/auth/google-login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     googleCredential: credentialResponse.credential,
-    //   }),
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   console.log('Backend response:', data);
-    //   // Handle success (e.g., store user session/token, redirect to dashboard) or error
-    // })
-    // .catch(error => {
-    //   console.error('Error sending Google credential to backend:', error);
-    // });
+
   };
 
   const handleGoogleLoginError = () => {
     console.log('Google Login Failed');
     // Handle error (e.g., show an error message to the user)
   };
+
+  if(redirect){
+    navigate('/dashboard1');
+  }
 
 
   return (
@@ -89,6 +86,7 @@ function LoginPage() {
             <button
               type="submit"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={handleRedirect}
             >
               Log In with Email
             </button>

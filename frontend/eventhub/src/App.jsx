@@ -10,14 +10,17 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Route for the landing page */}
+
         <Route path="/" element={<LandingPage />} />
-        {/* Route for the signup page */}
+     
         <Route path="/signup" element={<SignupPage />} />
-        {/* Route for the login page */}
+      
         <Route path="/login" element={<LoginPage />} />
-        {/* Add other routes for your application here */}
-        <Route path='/dashboard/*' element={<OrganizerDashboard/>} /> 
+
+        <Route path='/dashboard1' element={<OrganizerDashboard/>} /> 
+
+
+        <Route path='/dashboard2' element={<OrganizerDashboard/>} /> 
       </Routes>
     </Router>
   );

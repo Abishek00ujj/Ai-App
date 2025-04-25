@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link,useNavigate } from 'react-router-dom'; // Import Link
 import HeroImage from '../assets/img/LandingPage.jpg';
 import CalendarIcon from '../assets/img/calander feature.svg';
 import GuestsIcon from '../assets/img/guest.svg';
@@ -9,6 +9,7 @@ import Logo from '../assets/img/event-logo.jpg';
 import Navbar from '../components/Navbar';
 
 function LandingPage() {
+  const navigate = useNavigate();
   return (
     <>
     <Navbar />
